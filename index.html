@@ -1,558 +1,543 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>个人网站 - 我的个人主页</title>
-    <style>
-        /* 全局样式 */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Arial', '微软雅黑', sans-serif;
-        }
-        
-        body {
-            line-height: 1.6;
-            color: #333;
-            background-color: #f5f5f5;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        /* 导航栏样式 */
-        header {
-            background-color: #333;
-            color: white;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-        }
-        
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 0;
-        }
-        
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-        
-        .nav-links {
-            display: flex;
-            list-style: none;
-        }
-        
-        .nav-links li {
-            margin-left: 2rem;
-        }
-        
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        
-        .nav-links a:hover {
-            color: #4CAF50;
-        }
-        
-        /* 首屏样式 */
-        .hero {
-            height: 100vh;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            display: flex;
-            align-items: center;
-            text-align: center;
-            padding-top: 60px;
-        }
-        
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-        }
-        
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-        }
-        
-        .btn {
-            display: inline-block;
-            background-color: #4CAF50;
-            color: white;
-            padding: 12px 30px;
-            border: none;
-            border-radius: 50px;
-            text-decoration: none;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .btn:hover {
-            background-color: #45a049;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        }
-        
-        /* 关于我部分 */
-        #about {
-            padding: 100px 0;
-            background-color: white;
-        }
-        
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 50px;
-            color: #333;
-        }
-        
-        .about-content {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-        }
-        
-        .about-text {
-            flex: 1;
-            min-width: 300px;
-            margin-right: 40px;
-        }
-        
-        .about-text h3 {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            color: #555;
-        }
-        
-        .about-text p {
-            margin-bottom: 15px;
-            font-size: 1.1rem;
-            color: #666;
-        }
-        
-        .about-image {
-            flex: 1;
-            min-width: 300px;
-            text-align: center;
-        }
-        
-        .about-image img {
-            width: 250px;
-            height: 250px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 5px solid #f5f5f5;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-        
-        /* 技能部分 */
-        #skills {
-            padding: 100px 0;
-            background-color: #f9f9f9;
-        }
-        
-        .skills-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-        }
-        
-        .skill-card {
-            background-color: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
-        }
-        
-        .skill-card:hover {
-            transform: translateY(-10px);
-        }
-        
-        .skill-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            color: #333;
-            text-align: center;
-        }
-        
-        .skill-card ul {
-            list-style: none;
-        }
-        
-        .skill-card li {
-            padding: 8px 0;
-            border-bottom: 1px solid #eee;
-            color: #666;
-        }
-        
-        /* 项目展示 */
-        #projects {
-            padding: 100px 0;
-            background-color: white;
-        }
-        
-        .projects-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-        }
-        
-        .project-card {
-            background-color: #f9f9f9;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
-        }
-        
-        .project-card:hover {
-            transform: translateY(-10px);
-        }
-        
-        .project-image {
-            height: 200px;
-            overflow: hidden;
-        }
-        
-        .project-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s;
-        }
-        
-        .project-card:hover .project-image img {
-            transform: scale(1.1);
-        }
-        
-        .project-content {
-            padding: 20px;
-        }
-        
-        .project-content h3 {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-            color: #333;
-        }
-        
-        .project-content p {
-            color: #666;
-            margin-bottom: 15px;
-        }
-        
-        /* 联系方式 */
-        #contact {
-            padding: 100px 0;
-            background-color: #333;
-            color: white;
-        }
-        
-        #contact .section-title {
-            color: white;
-        }
-        
-        .contact-container {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-        }
-        
-        .contact-info {
-            flex: 1;
-            min-width: 300px;
-            margin-right: 40px;
-        }
-        
-        .contact-info h3 {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-        }
-        
-        .contact-info p {
-            margin-bottom: 15px;
-            font-size: 1.1rem;
-        }
-        
-        .contact-form {
-            flex: 1;
-            min-width: 300px;
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 15px;
-            border: none;
-            border-radius: 5px;
-            font-size: 1rem;
-        }
-        
-        .form-group textarea {
-            resize: vertical;
-            min-height: 150px;
-        }
-        
-        /* 页脚 */
-        footer {
-            background-color: #222;
-            color: white;
-            text-align: center;
-            padding: 30px 0;
-        }
-        
-        .social-links {
-            margin: 20px 0;
-        }
-        
-        .social-links a {
-            display: inline-block;
-            color: white;
-            margin: 0 10px;
-            font-size: 1.5rem;
-            transition: color 0.3s;
-        }
-        
-        .social-links a:hover {
-            color: #4CAF50;
-        }
-        
-        /* 响应式设计 */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .nav-links {
-                display: none;
-            }
-            
-            .about-content,
-            .contact-container {
-                flex-direction: column;
-            }
-            
-            .about-text,
-            .contact-info {
-                margin-right: 0;
-                margin-bottom: 40px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>王梓萌，生日快乐！</title>
+  <!-- 引入外部资源 -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  
+  <!-- Tailwind 配置 -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#1E88E5', // 主蓝色
+            secondary: '#42A5F5', // 次要蓝色
+            accent: '#FFD54F', // 强调色-金色
+            dark: '#1565C0', // 深蓝色
+          },
+          fontFamily: {
+            dancing: ['"Dancing Script"', 'cursive'],
+            poppins: ['Poppins', 'sans-serif'],
+          },
+        },
+      }
+    }
+  </script>
+  
+  <!-- 自定义工具类 -->
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .text-shadow {
+        text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
+      .text-shadow-lg {
+        text-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      }
+      .animate-float {
+        animation: float 6s ease-in-out infinite;
+      }
+      .animate-float-delay-1 {
+        animation: float 6s ease-in-out 1s infinite;
+      }
+      .animate-float-delay-2 {
+        animation: float 6s ease-in-out 2s infinite;
+      }
+      .animate-pulse-slow {
+        animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+      }
+      .game-glow {
+        box-shadow: 0 0 15px rgba(30, 136, 229, 0.6);
+      }
+    }
+  </style>
+  
+  <!-- 额外样式 -->
+  <style>
+    /* 导入字体 */
+    @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600;700&display=swap');
+    
+    /* 气球动画 */
+    @keyframes float {
+      0% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(5deg); }
+      100% { transform: translateY(0px) rotate(0deg); }
+    }
+    
+    /* 背景渐变动画 - 蓝色主题 */
+    body {
+      background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+      background-size: 400% 400%;
+      animation: gradient 15s ease infinite;
+      min-height: 100vh;
+    }
+    
+    @keyframes gradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    /* 蜡烛火焰动画 */
+    .flame {
+      animation: flicker 2s infinite;
+      transform-origin: bottom;
+    }
+    
+    @keyframes flicker {
+      0%, 100% { transform: scale(1) rotate(-2deg); }
+      50% { transform: scale(1.1) rotate(2deg); }
+    }
+    
+    /* 礼物盒动画 - 增强效果 */
+    .gift {
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+    
+    .gift:hover {
+      transform: translateY(-10px);
+    }
+    
+    .gift:hover .gift-lid {
+      transform: translateY(-20px) rotate(5deg);
+    }
+    
+    .gift-lid {
+      transition: all 0.3s ease;
+    }
+    
+    /* 礼物打开特效 */
+    .gift-opened .gift-lid {
+      transform: translateY(-40px) rotate(15deg) !important;
+    }
+    
+    .gift-content {
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.5s ease;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.8);
+    }
+    
+    .gift-opened .gift-content {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+    
+    /* 游戏元素动画 */
+    .game-icon {
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+    
+    .game-icon:hover {
+      transform: scale(1.1) rotate(10deg);
+      filter: brightness(1.2);
+    }
+  </style>
 </head>
-<body>
-    <!-- 导航栏 -->
-    <header>
-        <div class="container">
-            <nav>
-                <div class="logo">个人网站</div>
-                <ul class="nav-links">
-                    <li><a href="#home">首页</a></li>
-                    <li><a href="#about">关于我</a></li>
-                    <li><a href="#skills">技能</a></li>
-                    <li><a href="#projects">项目</a></li>
-                    <li><a href="#contact">联系我</a></li>
-                </ul>
-            </nav>
-        </div>
+
+<body class="font-poppins text-dark overflow-x-hidden">
+  <!-- 游戏和运动元素装饰 -->
+  <div class="fixed top-0 left-0 w-full h-full pointer-events-none z-0 opacity-20">
+    <i class="fa fa-gamepad absolute top-[10%] left-[80%] text-4xl text-primary animate-float"></i>
+    <i class="fa fa-futbol-o absolute top-[30%] left-[10%] text-4xl text-primary animate-float-delay-1"></i>
+    <i class="fa fa-bicycle absolute top-[60%] left-[90%] text-4xl text-primary animate-float-delay-2"></i>
+    <i class="fa fa-gamepad absolute top-[70%] left-[20%] text-4xl text-primary animate-float"></i>
+    <i class="fa fa-running absolute top-[40%] left-[70%] text-4xl text-primary animate-float-delay-1"></i>
+  </div>
+
+  <!-- 气球装饰 - 蓝色主题 -->
+  <div class="fixed top-0 left-0 w-full h-full pointer-events-none z-0">
+    <div class="absolute top-[10%] left-[5%] w-16 h-24 bg-primary rounded-full animate-float"></div>
+    <div class="absolute top-[15%] left-[85%] w-20 h-28 bg-secondary rounded-full animate-float-delay-1"></div>
+    <div class="absolute top-[20%] left-[15%] w-18 h-26 bg-dark rounded-full animate-float-delay-2"></div>
+    <div class="absolute top-[5%] left-[70%] w-14 h-20 bg-blue-300 rounded-full animate-float"></div>
+    <div class="absolute top-[25%] left-[90%] w-16 h-24 bg-blue-600 rounded-full animate-float-delay-1"></div>
+  </div>
+
+  <div class="container mx-auto px-4 py-12 relative z-10">
+    <!-- 头部标题 -->
+    <header class="text-center mb-12">
+      <h1 class="font-dancing text-[clamp(3rem,8vw,5rem)] font-bold text-primary text-shadow-lg mb-4 animate-pulse-slow">
+        王梓萌，生日快乐！
+      </h1>
+      <p class="text-[clamp(1rem,3vw,1.25rem)] text-gray-600 max-w-2xl mx-auto">
+        愿你的每一天都像赢得游戏胜利一样开心，像运动冲刺一样充满活力！
+      </p>
     </header>
 
-    <!-- 首屏部分 -->
-    <section id="home" class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1>你好，我是 [你的名字]</h1>
-                <p>欢迎来到我的个人网站！我是一名 [你的职业]，热爱 [你的兴趣爱好]。</p>
-                <a href="#about" class="btn">了解更多</a>
+    <!-- 主要内容区 -->
+    <main class="max-w-4xl mx-auto">
+      <!-- 生日蛋糕 - 蓝色主题 -->
+      <div class="flex justify-center my-16">
+        <div class="relative">
+          <!-- 蛋糕底部 -->
+          <div class="w-64 h-20 bg-primary rounded-t-3xl relative game-glow">
+            <div class="absolute top-4 left-0 w-full h-2 bg-accent"></div>
+          </div>
+          <!-- 蛋糕顶部 -->
+          <div class="w-56 h-16 bg-secondary rounded-t-3xl mx-auto -mt-2 game-glow">
+            <div class="absolute top-3 left-0 w-full h-2 bg-accent"></div>
+          </div>
+          <!-- 蜡烛 -->
+          <div class="flex justify-center gap-4 -mt-8">
+            <div class="flex flex-col items-center">
+              <div class="w-2 h-8 bg-yellow-200"></div>
+              <div class="w-3 h-3 bg-accent rounded-full flame"></div>
             </div>
+            <div class="flex flex-col items-center">
+              <div class="w-2 h-10 bg-yellow-200"></div>
+              <div class="w-3 h-3 bg-accent rounded-full flame"></div>
+            </div>
+            <div class="flex flex-col items-center">
+              <div class="w-2 h-7 bg-yellow-200"></div>
+              <div class="w-3 h-3 bg-accent rounded-full flame"></div>
+            </div>
+          </div>
         </div>
-    </section>
+      </div>
 
-    <!-- 关于我部分 -->
-    <section id="about">
-        <div class="container">
-            <h2 class="section-title">关于我</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <h3>我的故事</h3>
-                    <p>我是一名充满激情的 [职业]，拥有 [X] 年的工作经验。我毕业于 [大学名称]，专业是 [专业名称]。</p>
-                    <p>我热衷于 [你的兴趣领域]，并且不断学习新的技能和知识来提升自己。我相信 [你的人生哲学或工作理念]。</p>
-                    <p>在业余时间，我喜欢 [兴趣爱好，如旅行、读书、运动等]，这些活动不仅丰富了我的生活，也为我的工作带来了新的灵感。</p>
-                </div>
-                <div class="about-image">
-                    <img src="https://via.placeholder.com/250" alt="个人照片">
-                </div>
-            </div>
+      <!-- 祝福信息卡片 -->
+      <div class="bg-white rounded-2xl shadow-xl p-8 mb-16 transform transition-all duration-300 hover:shadow-2xl">
+        <h2 class="font-dancing text-[clamp(1.8rem,5vw,2.5rem)] text-primary mb-6 text-center">给梓萌的特别祝福</h2>
+        <p class="text-gray-700 leading-relaxed mb-6 text-center">
+          希望你新的一岁里，游戏能超神，运动能夺冠！愿你的每一个挑战都能成功通关，每一次努力都能收获满满。
+          愿健康、快乐和好运永远陪伴着你！
+        </p>
+        <div class="flex justify-center">
+          <button id="confettiBtn" class="bg-primary hover:bg-dark text-white font-semibold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 flex items-center gap-2">
+            <i class="fa fa-gift"></i> 打开惊喜
+          </button>
         </div>
-    </section>
+      </div>
 
-    <!-- 技能部分 -->
-    <section id="skills">
-        <div class="container">
-            <h2 class="section-title">我的技能</h2>
-            <div class="skills-container">
-                <div class="skill-card">
-                    <h3>专业技能</h3>
-                    <ul>
-                        <li>HTML5 / CSS3</li>
-                        <li>JavaScript</li>
-                        <li>React / Vue</li>
-                        <li>Node.js</li>
-                        <li>UI/UX 设计</li>
-                    </ul>
-                </div>
-                <div class="skill-card">
-                    <h3>工具使用</h3>
-                    <ul>
-                        <li>Git / GitHub</li>
-                        <li>Visual Studio Code</li>
-                        <li>Adobe Creative Suite</li>
-                        <li>Figma / Sketch</li>
-                        <li>Webpack / Gulp</li>
-                    </ul>
-                </div>
-                <div class="skill-card">
-                    <h3>其他能力</h3>
-                    <ul>
-                        <li>项目管理</li>
-                        <li>团队协作</li>
-                        <li>问题解决</li>
-                        <li>沟通能力</li>
-                        <li>持续学习</li>
-                    </ul>
-                </div>
-            </div>
+      <!-- 礼物盒区域 - 增强特效 -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+        <!-- 礼物盒1 - 游戏主题 -->
+        <div class="gift flex flex-col items-center relative h-40">
+          <div class="gift-lid w-32 h-6 bg-primary rounded-t-md z-10"></div>
+          <div class="w-28 h-24 bg-primary/80 relative z-10">
+            <div class="absolute top-0 left-1/2 transform -translate-x-1/2 w-3 h-full bg-blue-300"></div>
+            <div class="absolute top-1/2 left-0 transform -translate-y-1/2 w-full h-3 bg-blue-300"></div>
+          </div>
+          <div class="gift-content text-center">
+            <i class="fa fa-gamepad text-3xl text-accent game-icon"></i>
+            <p class="text-xs mt-1 text-primary font-bold">新游戏！</p>
+          </div>
         </div>
-    </section>
+        
+        <!-- 礼物盒2 - 运动主题 -->
+        <div class="gift flex flex-col items-center relative h-40">
+          <div class="gift-lid w-32 h-6 bg-dark rounded-t-md z-10"></div>
+          <div class="w-28 h-24 bg-dark/80 relative z-10">
+            <div class="absolute top-0 left-1/2 transform -translate-x-1/2 w-3 h-full bg-blue-300"></div>
+            <div class="absolute top-1/2 left-0 transform -translate-y-1/2 w-full h-3 bg-blue-300"></div>
+          </div>
+          <div class="gift-content text-center">
+            <i class="fa fa-trophy text-3xl text-accent game-icon"></i>
+            <p class="text-xs mt-1 text-primary font-bold">运动装备！</p>
+          </div>
+        </div>
+        
+        <!-- 礼物盒3 - 惊喜礼物 -->
+        <div class="gift flex flex-col items-center relative h-40">
+          <div class="gift-lid w-32 h-6 bg-secondary rounded-t-md z-10"></div>
+          <div class="w-28 h-24 bg-secondary/80 relative z-10">
+            <div class="absolute top-0 left-1/2 transform -translate-x-1/2 w-3 h-full bg-blue-300"></div>
+            <div class="absolute top-1/2 left-0 transform -translate-y-1/2 w-full h-3 bg-blue-300"></div>
+          </div>
+          <div class="gift-content text-center">
+            <i class="fa fa-star text-3xl text-accent game-icon"></i>
+            <p class="text-xs mt-1 text-primary font-bold">神秘惊喜！</p>
+          </div>
+        </div>
+      </div>
 
-    <!-- 项目展示 -->
-    <section id="projects">
-        <div class="container">
-            <h2 class="section-title">我的项目</h2>
-            <div class="projects-container">
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="https://via.placeholder.com/600x400?text=项目1" alt="项目图片">
-                    </div>
-                    <div class="project-content">
-                        <h3>项目名称 1</h3>
-                        <p>这是一个 [项目类型]，使用了 [技术栈] 开发。主要功能包括 [主要功能描述]。</p>
-                        <a href="#" class="btn">查看详情</a>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="https://via.placeholder.com/600x400?text=项目2" alt="项目图片">
-                    </div>
-                    <div class="project-content">
-                        <h3>项目名称 2</h3>
-                        <p>这是一个 [项目类型]，使用了 [技术栈] 开发。主要功能包括 [主要功能描述]。</p>
-                        <a href="#" class="btn">查看详情</a>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="https://via.placeholder.com/600x400?text=项目3" alt="项目图片">
-                    </div>
-                    <div class="project-content">
-                        <h3>项目名称 3</h3>
-                        <p>这是一个 [项目类型]，使用了 [技术栈] 开发。主要功能包括 [主要功能描述]。</p>
-                        <a href="#" class="btn">查看详情</a>
-                    </div>
-                </div>
-            </div>
+      <!-- 游戏和运动爱好展示 -->
+      <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg p-6 mb-16">
+        <h3 class="font-dancing text-2xl text-primary mb-6 text-center">梓萌的快乐时光</h3>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+          <div class="p-4 rounded-xl bg-primary/10">
+            <i class="fa fa-gamepad text-4xl text-primary mb-2 game-icon"></i>
+            <p class="text-sm">游戏</p>
+          </div>
+          <div class="p-4 rounded-xl bg-primary/10">
+            <i class="fa fa-futbol-o text-4xl text-primary mb-2 game-icon"></i>
+            <p class="text-sm">足球</p>
+          </div>
+          <div class="p-4 rounded-xl bg-primary/10">
+            <i class="fa fa-heartbeat text-4xl text-primary mb-2 game-icon"></i>
+            <p class="text-sm">运动</p>
+          </div>
+          <div class="p-4 rounded-xl bg-primary/10">
+            <i class="fa fa-trophy text-4xl text-primary mb-2 game-icon"></i>
+            <p class="text-sm">胜利</p>
+          </div>
         </div>
-    </section>
+      </div>
 
-    <!-- 联系方式 -->
-    <section id="contact">
-        <div class="container">
-            <h2 class="section-title">联系我</h2>
-            <div class="contact-container">
-                <div class="contact-info">
-                    <h3>保持联系</h3>
-                    <p>如果您对我的工作感兴趣，或者想了解更多信息，请随时联系我。我会尽快回复您的消息。</p>
-                    <p>邮箱：example@email.com</p>
-                    <p>电话：123-4567-8910</p>
-                    <p>地址：北京市朝阳区XX大厦</p>
-                </div>
-                <div class="contact-form">
-                    <form action="#">
-                        <div class="form-group">
-                            <input type="text" placeholder="您的姓名" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" placeholder="您的邮箱" required>
-                        </div>
-                        <div class="form-group">
-                            <textarea placeholder="您的留言" required></textarea>
-                        </div>
-                        <button type="submit" class="btn">发送消息</button>
-                    </form>
-                </div>
+      <!-- 倒计时和音乐 -->
+      <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg p-6 mb-12">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+          <div>
+            <h3 class="font-dancing text-2xl text-primary mb-2">距离下一个生日还有</h3>
+            <div class="flex gap-4" id="countdown">
+              <div class="text-center">
+                <div class="text-2xl font-bold text-dark" id="days">365</div>
+                <div class="text-sm text-gray-500">天</div>
+              </div>
+              <div class="text-center">
+                <div class="text-2xl font-bold text-dark" id="hours">00</div>
+                <div class="text-sm text-gray-500">时</div>
+              </div>
+              <div class="text-center">
+                <div class="text-2xl font-bold text-dark" id="minutes">00</div>
+                <div class="text-sm text-gray-500">分</div>
+              </div>
+              <div class="text-center">
+                <div class="text-2xl font-bold text-dark" id="seconds">00</div>
+                <div class="text-sm text-gray-500">秒</div>
+              </div>
             </div>
+          </div>
+          
+          <div class="flex items-center gap-3">
+            <button id="playMusic" class="bg-primary/10 hover:bg-primary/20 text-primary p-3 rounded-full transition-all">
+              <i class="fa fa-music"></i>
+            </button>
+            <span class="text-gray-600">播放生日歌</span>
+          </div>
         </div>
-    </section>
+      </div>
+    </main>
 
     <!-- 页脚 -->
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 个人网站. 保留所有权利。</p>
-            <div class="social-links">
-                <a href="#">微信</a>
-                <a href="#">微博</a>
-                <a href="#">GitHub</a>
-                <a href="#">LinkedIn</a>
-            </div>
-        </div>
+    <footer class="text-center text-gray-500 text-sm py-6">
+      <p>给王梓萌的生日祝福 | 愿游戏开心，运动畅快！</p>
     </footer>
+  </div>
 
-    <!-- JavaScript -->
-    <script>
-        // 平滑滚动效果
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
+  <!-- 音乐元素 -->
+  <audio id="birthdaySong" loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+   您的浏览器不支持音频元素。
+  </audio>
+
+  <!-- 烟花效果容器 -->
+  <div id="confettiContainer" class="fixed inset-0 pointer-events-none z-50"></div>
+
+  <script>
+    // 倒计时功能
+    function updateCountdown() {
+      // 获取当前年份
+      const currentYear = new Date().getFullYear();
+      // 设置下一个生日 (可修改为实际生日)
+      let nextBirthday = new Date(currentYear, 11, 31); // 月份是从0开始的，11代表12月
+      
+      // 如果今年的生日已经过了，就计算明年的
+      const today = new Date();
+      if (nextBirthday < today) {
+        nextBirthday = new Date(currentYear + 1, 11, 31);
+      }
+      
+      // 计算时间差
+      const diff = nextBirthday - today;
+      
+      // 转换为天、时、分、秒
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+      
+      // 更新DOM
+      document.getElementById('days').textContent = days;
+      document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+      document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+      document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+    }
+    
+    // 初始化倒计时并每秒更新
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+    
+    // 音乐播放控制
+    const musicButton = document.getElementById('playMusic');
+    const birthdaySong = document.getElementById('birthdaySong');
+    
+    musicButton.addEventListener('click', () => {
+      if (birthdaySong.paused) {
+        birthdaySong.play();
+        musicButton.innerHTML = '<i class="fa fa-pause"></i>';
+      } else {
+        birthdaySong.pause();
+        musicButton.innerHTML = '<i class="fa fa-music"></i>';
+      }
+    });
+    
+    // 烟花/彩屑效果 - 增强版
+    document.getElementById('confettiBtn').addEventListener('click', createConfetti);
+    
+    function createConfetti() {
+      const container = document.getElementById('confettiContainer');
+      const colors = ['#1E88E5', '#42A5F5', '#1565C0', '#FFD54F', '#64B5F6', '#BBDEFB'];
+      
+      // 创建更多彩屑 (200个)
+      for (let i = 0; i < 200; i++) {
+        const confetti = document.createElement('div');
         
-        // 导航栏滚动效果
-        window.addEventListener('scroll', function() {
-            const header = document.querySelector('header');
-            if (window.scrollY > 100) {
-                header.style.backgroundColor = 'rgba(51, 51, 51, 0.9)';
-            } else {
-                header.style.backgroundColor = '#333';
-            }
-        });
-    </script>
+        // 随机样式 - 增加形状多样性
+        const size = Math.random() * 12 + 4;
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        const left = Math.random() * 100;
+        const rotation = Math.random() * 360;
+        const delay = Math.random() * 5;
+        const duration = Math.random() * 4 + 2;
+        
+        // 随机形状
+        const shapes = ['circle', 'square', 'triangle'];
+        const shape = shapes[Math.floor(Math.random() * shapes.length)];
+        
+        // 设置样式
+        confetti.style.position = 'absolute';
+        confetti.style.width = `${size}px`;
+        confetti.style.height = `${size}px`;
+        confetti.style.backgroundColor = color;
+        confetti.style.left = `${left}%`;
+        confetti.style.top = '-10px';
+        confetti.style.transform = `rotate(${rotation}deg)`;
+        confetti.style.opacity = '0.8';
+        confetti.style.animation = `fall ${duration}s ease-in ${delay}s forwards`;
+        
+        // 应用不同形状
+        if (shape === 'circle') {
+          confetti.style.borderRadius = '50%';
+        } else if (shape === 'triangle') {
+          confetti.style.clipPath = 'polygon(50% 0%, 0% 100%, 100% 100%)';
+          confetti.style.width = `${size * 1.2}px`;
+        }
+        
+        container.appendChild(confetti);
+        
+        // 动画结束后移除元素
+        setTimeout(() => {
+          confetti.remove();
+        }, (delay + duration) * 1000);
+      }
+      
+      // 同时打开所有礼物
+      document.querySelectorAll('.gift').forEach((gift, index) => {
+        setTimeout(() => {
+          gift.classList.add('gift-opened');
+          
+          // 播放礼物打开音效
+          const audio = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-unboxing-a-gift-2530.mp3');
+          audio.volume = 0.5;
+          audio.play().catch(e => console.log('音效播放需要用户交互'));
+        }, index * 300);
+      });
+    }
+    
+    // 礼物点击交互
+    document.querySelectorAll('.gift').forEach(gift => {
+      gift.addEventListener('click', () => {
+        if (!gift.classList.contains('gift-opened')) {
+          gift.classList.add('gift-opened');
+          
+          // 播放礼物打开音效
+          const audio = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-unboxing-a-gift-2530.mp3');
+          audio.volume = 0.5;
+          audio.play().catch(e => console.log('音效播放需要用户交互'));
+          
+          // 生成小范围彩屑
+          createMiniConfetti(gift);
+        }
+      });
+    });
+    
+    // 小范围彩屑效果
+    function createMiniConfetti(element) {
+      const container = document.getElementById('confettiContainer');
+      const rect = element.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      const colors = ['#1E88E5', '#42A5F5', '#1565C0', '#FFD54F'];
+      
+      // 生成30个小彩屑
+      for (let i = 0; i < 30; i++) {
+        const confetti = document.createElement('div');
+        
+        const size = Math.random() * 6 + 3;
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        const angle = Math.random() * Math.PI * 2;
+        const distance = Math.random() * 50 + 20;
+        const x = centerX + Math.cos(angle) * distance;
+        const y = centerY + Math.sin(angle) * distance;
+        const rotation = Math.random() * 360;
+        const duration = Math.random() * 2 + 1;
+        
+        confetti.style.position = 'absolute';
+        confetti.style.width = `${size}px`;
+        confetti.style.height = `${size}px`;
+        confetti.style.backgroundColor = color;
+        confetti.style.left = `${x}px`;
+        confetti.style.top = `${y}px`;
+        confetti.style.transform = `rotate(${rotation}deg)`;
+        confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+        confetti.style.opacity = '0.9';
+        confetti.style.animation = `mini-fall ${duration}s ease-out forwards`;
+        
+        container.appendChild(confetti);
+        
+        setTimeout(() => {
+          confetti.remove();
+        }, duration * 1000);
+      }
+    }
+    
+    // 添加下落动画
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes fall {
+        0% {
+          transform: translateY(0) rotate(0deg);
+          opacity: 0.8;
+        }
+        100% {
+          transform: translateY(100vh) rotate(360deg);
+          opacity: 0;
+        }
+      }
+      
+      @keyframes mini-fall {
+        0% {
+          transform: translateY(0) rotate(0deg) scale(1);
+          opacity: 0.9;
+        }
+        100% {
+          transform: translateY(150px) rotate(360deg) scale(0.3);
+          opacity: 0;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+    
+    // 页面加载动画
+    window.addEventListener('load', () => {
+      document.querySelectorAll('.game-icon').forEach((icon, index) => {
+        setTimeout(() => {
+          icon.classList.add('animate-bounce');
+          setTimeout(() => {
+            icon.classList.remove('animate-bounce');
+          }, 1000);
+        }, index * 200);
+      });
+    });
+  </script>
 </body>
 </html>
